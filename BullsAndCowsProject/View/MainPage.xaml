@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BullsAndCowsProject.Views.MainPage"
+    Title="Bulls and Cows"
+    BackgroundColor="White">
+
+    <Grid Padding="24,32,24,18"
+          RowDefinitions="Auto,*,Auto"
+          RowSpacing="20">
+
+        <!-- כותרת המשחק -->
+        <Label Grid.Row="0"
+               Text="BULLS AND COWS"
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalTextAlignment="Center"
+               HorizontalOptions="Center" />
+
+        <!-- אזור המשחק -->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Spacing="26"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="260">
+
+            <!-- הכנסת ניחוש -->
+            <Border Stroke="#F3C5EA"
+                    StrokeThickness="2"
+                    BackgroundColor="White"
+                    Padding="8,0">
+
+                <Entry Placeholder="Your Guess"
+                       Text="{Binding Guess, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       MaxLength="10"
+                       TextColor="Black"
+                       PlaceholderColor="Black"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+
+            <!-- כפתור להגרלת מספר אקראי -->
+            <Button Text="Generate Random Number"
+        Command="{Binding GenerateRandomNumberCommand}"
+        BackgroundColor="#F3C5EA"
+        TextColor="Black"
+        CornerRadius="8"
+        WidthRequest="220"
+        HorizontalOptions="Center" />
+
+            <!-- הצגת המספר שהוגרל -->
+            <Border Stroke="#F3C5EA"
+        StrokeThickness="2"
+        BackgroundColor="#FFF5FC"
+        Padding="12,10"
+        StrokeShape="RoundRectangle 8"
+        WidthRequest="180"
+        HorizontalOptions="Center">
+
+                <Label Text="{Binding RandomNumberText}"
+           FontSize="22"
+           FontAttributes="Bold"
+           TextColor="Black"
+           HorizontalTextAlignment="Center" />
+
+            </Border>
+
+
+            <!-- כפתור שליחת ניחוש -->
+            <Button Text="Submit Guess"
+                    Command="{Binding SubmitGuessCommand}"
+                    IsEnabled="{Binding CanSubmitGuess}"
+                    BackgroundColor="#A7CAEA"
+                    TextColor="Black"
+                    CornerRadius="0"
+                    WidthRequest="180"
+                    HorizontalOptions="Center" />
+
+            <!-- הצגת תוצאת הניחוש -->
+            <Border Stroke="#F3C5EA"
+                    StrokeThickness="2"
+                    Padding="12,8"
+                    Margin="0,38,0,0"
+                    IsVisible="{Binding HasStatusMessage}">
+
+                <Label Text="{Binding StatusMessage}"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+
+            <!-- הצגת הודעת שגיאה -->
+            <Border Stroke="#F3C5EA"
+                    StrokeThickness="2"
+                    Padding="12,8"
+                    IsVisible="{Binding HasErrorMessage}">
+
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="Red"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+
+        </VerticalStackLayout>
+
+        <!-- החלק התחתון של המסך -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="2*,1.3*"
+              ColumnSpacing="10">
+
+            <!-- כפתור משחק חדש -->
+            <Button Grid.Column="0"
+                    Text="New Game"
+                    Command="{Binding NewGameCommand}"
+                    BackgroundColor="White"
+                    BorderColor="#F3C5EA"
+                    BorderWidth="2"
+                    TextColor="Black"
+                    CornerRadius="0" />
+
+            <!-- מספר ניסיונות -->
+            <Border Grid.Column="1"
+                    Stroke="#F3C5EA"
+                    StrokeThickness="2"
+                    Padding="10,8">
+
+                <Label Text="{Binding AttemptsText}"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black" />
+            </Border>
+
+        </Grid>
+    </Grid>
+</ContentPage>
